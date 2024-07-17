@@ -28,22 +28,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf---fzf-tab
 
-# Load completions
-autoload -U compinit && compinit
-
-# Path to your oh-my-zsh installation.
-export ZSH="$OH_MY_ZSH_HOME"
-
-source $ZSH/oh-my-zsh.sh
-
-
-source ~/.local/share/zinit/plugins/Aloxaf---fzf-tab/fzf-tab.plugin.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 plugins=(
 	git
@@ -66,6 +50,25 @@ plugins=(
 	# pnpm
 	# task
 )
+
+# Load completions
+autoload -U compinit && compinit
+
+# Path to your oh-my-zsh installation.
+export ZSH="$OH_MY_ZSH_HOME"
+
+source $ZSH/oh-my-zsh.sh
+
+
+source ~/.local/share/zinit/plugins/Aloxaf---fzf-tab/fzf-tab.plugin.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+
 
 
 
