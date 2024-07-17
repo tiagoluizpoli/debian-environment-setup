@@ -36,12 +36,38 @@ export ZSH="$OH_MY_ZSH_HOME"
 
 source $ZSH/oh-my-zsh.sh
 
+
+source ~/.local/share/zinit/plugins/Aloxaf---fzf-tab/fzf-tab.plugin.zsh
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source ~/.local/share/zinit/plugins/Aloxaf---fzf-tab/fzf-tab.plugin.zsh
+
+plugins=(
+	git
+	docker
+	docker-compose
+	dotnet
+	flutter
+	git-commit
+	aws
+	dnf
+	asdf
+	yarn
+	npm
+	nats
+	github
+	node
+	z
+	bgnotify
+	# These two plugins must be installed manually along the tool it self
+	# pnpm
+	# task
+)
+
+
 
 # History
 HISTSIZE=10000
@@ -62,8 +88,35 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
+# Shell integrations
+eval "$(fzf --zsh)"
+
+# Utils
+
+# create directories recursively and cd into it.
+mkdircd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# ranger
+# sudo apt install ranger
+# cd into the last directory visited by ranger (when pressing "q" to leave the tool)
+ranger_cd() {
+    temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+    ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+
+
 # Aliases
+# system replacements
 alias ls='ls --color'
 
-# Shell integrations
-# eval "$(fzf --zsh)"
+# custom
+alias mkcd='mkdircd'
+alias ranger='ranger_cd'
+alias r='ranger_cd'
