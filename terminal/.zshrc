@@ -19,6 +19,19 @@ if [ ! -d "$OH_MY_ZSH_HOME" ]; then
 	mkdir -p "$(dirname $OH_MY_ZSH_HOME)"
 	git clone https://github.com/ohmyzsh/ohmyzsh.git "$OH_MY_ZSH_HOME"
 fi
+
+TASK_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/task"
+if [ ! -d "$TASK_PLUGIN_HOME" ]; then
+	mkdir -p "$(dirname $TASK_PLUGIN_HOME)"
+	git clone https://github.com/sawadashota/go-task-completions.git "$TASK_PLUGIN_HOME"	
+fi
+
+PNPM_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/pnpm"
+if [ ! -d "$PNPM_PLUGIN_HOME" ]; then
+	mkdir -p "$(dirname $PNPM_PLUGIN_HOME)"
+	git clone https://github.com/ntnyq/omz-plugin-pnpm.git "$PNPM_PLUGIN_HOME"	
+fi
+
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -47,12 +60,20 @@ plugins=(
 	z
 	bgnotify
 	# These two plugins must be installed manually along the tool it self
-	# pnpm
-	# task
+	pnpm
+	task
 )
 
+ASDF_PATH="${XDG_DATA_HOME:-${HOME}/.asdf}"
+if [ ! -d "$ASDF_PATH" ]; then
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+fi
+
+. "$HOME/.asdf/asdf.sh"
+
 # Load completions
-autoload -U compinit && compinit
+autoload -U compinit
+compinit -i
 
 # Path to your oh-my-zsh installation.
 export ZSH="$OH_MY_ZSH_HOME"
@@ -67,12 +88,13 @@ source ~/.local/share/zinit/plugins/Aloxaf---fzf-tab/fzf-tab.plugin.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-ZOXIDE="${XDG_DATA_HOME:-${HOME}/.local/bin}"
-if [ ! -d "$ZOXIDE" ]; then
-	curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-fi
+# ZOXIDE="${XDG_DATA_HOME:-${HOME}/.local/bin}"
+# if [ ! -d "$ZOXIDE" ]; then
+# 	curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+# fi
 
 export PATH="$HOME/.local/bin:$PATH"
+
 
 # History
 HISTSIZE=10000
@@ -92,11 +114,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+# eval "$(zoxide init --cmd cd zsh)"
 
 # Utils
 
@@ -118,7 +140,6 @@ ranger_cd() {
 }
 
 
-
 # Aliases
 # system replacements
 alias ls='ls --color'
@@ -127,3 +148,13 @@ alias ls='ls --color'
 alias mkcd='mkdircd'
 alias ranger='ranger_cd'
 alias r='ranger_cd'
+
+# pnpm
+export PNPM_HOME="/home/tiagoluizpoli/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+source ~/completion-for-pnpm.zsh
