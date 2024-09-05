@@ -20,17 +20,24 @@ if [ ! -d "$OH_MY_ZSH_HOME" ]; then
 	git clone https://github.com/ohmyzsh/ohmyzsh.git "$OH_MY_ZSH_HOME"
 fi
 
+FZF_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/fzf"
+if [ ! -d "$FZF_PLUGIN_HOME" ]; then
+	mkdir -p "$(dirname $FZF_PLUGIN_HOME)"
+	git clone --depth 1 https://github.com/junegunn/fzf.git "$FZF_PLUGIN_HOME"
+	$FZF_PLUGIN_HOME/install
+fi
+
 TASK_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/task"
 if [ ! -d "$TASK_PLUGIN_HOME" ]; then
 	mkdir -p "$(dirname $TASK_PLUGIN_HOME)"
 	git clone https://github.com/sawadashota/go-task-completions.git "$TASK_PLUGIN_HOME"	
 fi
 
-PNPM_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/pnpm"
-if [ ! -d "$PNPM_PLUGIN_HOME" ]; then
-	mkdir -p "$(dirname $PNPM_PLUGIN_HOME)"
-	git clone https://github.com/ntnyq/omz-plugin-pnpm.git "$PNPM_PLUGIN_HOME"	
-fi
+# PNPM_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/pnpm"
+# if [ ! -d "$PNPM_PLUGIN_HOME" ]; then
+# 	mkdir -p "$(dirname $PNPM_PLUGIN_HOME)"
+# 	git clone https://github.com/ntnyq/omz-plugin-pnpm.git "$PNPM_PLUGIN_HOME"	
+# fi
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -39,7 +46,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf---fzf-tab
+zinit light ntnyq/omz-plugin-pnpm
 
 
 plugins=(
@@ -81,7 +88,7 @@ export ZSH="$OH_MY_ZSH_HOME"
 source $ZSH/oh-my-zsh.sh
 
 
-source ~/.local/share/zinit/plugins/Aloxaf---fzf-tab/fzf-tab.plugin.zsh
+# source ~/.local/share/zinit/plugins/Aloxaf---fzf-tab/fzf-tab.plugin.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -117,7 +124,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Shell integrations
-eval "$(fzf --zsh)"
+source <(fzf --zsh)
 # eval "$(zoxide init --cmd cd zsh)"
 
 # Utils
@@ -157,4 +164,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-source ~/completion-for-pnpm.zsh
+# source ~/completion-for-pnpm.zsh
+
+export XDG_RUNTIME_DIR="/run/user/$UID"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+
+PATH=~/.console-ninja/.bin:$PATH
