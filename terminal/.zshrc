@@ -33,11 +33,11 @@ if [ ! -d "$TASK_PLUGIN_HOME" ]; then
 	git clone https://github.com/sawadashota/go-task-completions.git "$TASK_PLUGIN_HOME"	
 fi
 
-# PNPM_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/pnpm"
-# if [ ! -d "$PNPM_PLUGIN_HOME" ]; then
-# 	mkdir -p "$(dirname $PNPM_PLUGIN_HOME)"
-# 	git clone https://github.com/ntnyq/omz-plugin-pnpm.git "$PNPM_PLUGIN_HOME"	
-# fi
+PNPM_PLUGIN_HOME="${OH_MY_ZSH_HOME:-$HOME}/custom/plugins/pnpm"
+if [ ! -d "$PNPM_PLUGIN_HOME" ]; then
+	mkdir -p "$(dirname $PNPM_PLUGIN_HOME)"
+	git clone --depth=1 https://github.com/ntnyq/omz-plugin-pnpm.git "$PNPM_PLUGIN_HOME"	
+fi
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -46,7 +46,6 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light ntnyq/omz-plugin-pnpm
 
 
 plugins=(
