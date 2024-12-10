@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/tiagoluizpoli/.zsh/completions:"* ]]; then export FPATH="/home/tiagoluizpoli/.zsh/completions:$FPATH"; fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -68,6 +70,7 @@ plugins=(
 	# These two plugins must be installed manually along the tool it self
 	pnpm
 	task
+	# Testing
 )
 
 ASDF_PATH="${XDG_DATA_HOME:-${HOME}/.asdf}"
@@ -124,7 +127,12 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Shell integrations
 source <(fzf --zsh)
+source "$HOME/.rye/env"
+
+source "$HOME/.zsh/scripts/ssh-connect.zsh"
+
 # eval "$(zoxide init --cmd cd zsh)"
+
 
 # Utils
 
@@ -154,6 +162,7 @@ alias ls='ls --color'
 alias mkcd='mkdircd'
 alias ranger='ranger_cd'
 alias r='ranger_cd'
+alias grhl='grh HEAD~'
 
 # pnpm
 export PNPM_HOME="/home/tiagoluizpoli/.local/share/pnpm"
@@ -168,4 +177,12 @@ esac
 export XDG_RUNTIME_DIR="/run/user/$UID"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
 
-PATH=~/.console-ninja/.bin:$PATH
+
+PATH=/bin/tesseract:$PATH
+
+. "/home/tiagoluizpoli/.deno/env"
+
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit
+compinit -u
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

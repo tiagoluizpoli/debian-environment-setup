@@ -1,0 +1,10 @@
+{
+    "solutions-prod": {
+        "pem_path": "/path/to/your/pem/file.pem",
+        "local_port": 5438,
+        "remote_host": "url-to-your-database.us-east-1.rds.amazonaws.com",
+        "remote_port": 5432,
+        "user": "ec2-user",
+        "instance_ip": "ec2-instance-ip-or-dns"
+    }
+}
