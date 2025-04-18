@@ -35,11 +35,8 @@ if [ ! -d "$TASK_PLUGIN_HOME" ]; then
 	git clone https://github.com/sawadashota/go-task-completions.git "$TASK_PLUGIN_HOME"	
 fi
 
-PNPM_PLUGIN_HOME="${OH_MY_ZSH_HOME:-$HOME}/custom/plugins/pnpm"
-if [ ! -d "$PNPM_PLUGIN_HOME" ]; then
-	mkdir -p "$(dirname $PNPM_PLUGIN_HOME)"
-	git clone --depth=1 https://github.com/ntnyq/omz-plugin-pnpm.git "$PNPM_PLUGIN_HOME"	
-fi
+autoload -Uz compinit
+compinit -u
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -49,6 +46,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
+zinit ice atload"zpcdreplay" atclone"./zplug.zsh" atpull"%atclone"
+zinit light g-plane/pnpm-shell-completion
 
 plugins=(
 	git
@@ -79,6 +78,11 @@ if [ ! -d "$ASDF_PATH" ]; then
 fi
 
 . "$HOME/.asdf/asdf.sh"
+
+# append completions to fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+
 
 # Load completions
 autoload -U compinit
@@ -130,6 +134,8 @@ source <(fzf --zsh)
 source "$HOME/.rye/env"
 
 source "$HOME/.zsh/scripts/ssh-connect.zsh"
+alias gtd="~/.zsh/scripts/git-delete-tags-by-pattern.zsh"
+
 
 # eval "$(zoxide init --cmd cd zsh)"
 
@@ -183,6 +189,10 @@ PATH=/bin/tesseract:$PATH
 . "/home/tiagoluizpoli/.deno/env"
 
 fpath=(~/.zsh $fpath)
-autoload -Uz compinit
-compinit -u
+
+source "$HOME/.zsh/completions/gh/_gh"
+
+
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/share/pnpm:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/tiagoluizpoli/.asdf/shims:/home/tiagoluizpoli/.asdf/bin:/home/tiagoluizpoli/.deno/bin:/home/tiagoluizpoli/.rye/shims:/home/tiagoluizpoli/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin:/home/tiagoluizpoli/.dotnet/tools:/home/tiagoluizpoli/.local/share/JetBrains/Toolbox/scripts:/home/tiagoluizpoli/.yarn/bin:/home/tiagoluizpoli/.local/share/.oh-my-zsh/custom/plugins/fzf/bin:/home/tiagoluizpoli/.asdf/installs/nodejs/20.18.3/bin

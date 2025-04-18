@@ -1,0 +1,16 @@
+{
+    "template": {
+        "pem_path": "pathToYourKey.pem",
+        "local_port": 5438, // Port to forward
+        "remote_host": "remote_host", // Host to connect to
+        "remote_port": 5432,
+        "user": "ssh_user", // User to connect as
+        "instance_ip": "ssh_instance_ip",
+    }
+}
+
+// This is a template for SSH connection configuration.
+// Make sure to:
+//  replace the placeholders with your actual values.
+//  remove the comments
+// and change the extension from .jsonc to .json
