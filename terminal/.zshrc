@@ -1,5 +1,5 @@
 # Add deno completions to search path
-if [[ ":$FPATH:" != *":/home/tiagoluizpoli/.zsh/completions:"* ]]; then export FPATH="/home/tiagoluizpoli/.zsh/completions:$FPATH"; fi
+if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -134,7 +134,7 @@ source <(fzf --zsh)
 source "$HOME/.rye/env"
 
 source "$HOME/.zsh/scripts/ssh-connect.zsh"
-alias gtd="~/.zsh/scripts/git-delete-tags-by-pattern.zsh"
+alias gtd="$HOME/.zsh/scripts/git-delete-tags-by-pattern.zsh"
 
 
 # eval "$(zoxide init --cmd cd zsh)"
@@ -171,7 +171,7 @@ alias r='ranger_cd'
 alias grhl='grh HEAD~'
 
 # pnpm
-export PNPM_HOME="/home/tiagoluizpoli/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -186,7 +186,7 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
 
 PATH=/bin/tesseract:$PATH
 
-. "/home/tiagoluizpoli/.deno/env"
+. "$HOME/.deno/env"
 
 fpath=(~/.zsh $fpath)
 
