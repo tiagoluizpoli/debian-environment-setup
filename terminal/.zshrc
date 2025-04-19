@@ -10,29 +10,29 @@ fi
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 if [ ! -d "$ZINIT_HOME" ]; then
-	mkdir -p "$(dirname $ZINIT_HOME)"
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
 OH_MY_ZSH_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/.oh-my-zsh"
 if [ ! -d "$OH_MY_ZSH_HOME" ]; then
-	mkdir -p "$(dirname $OH_MY_ZSH_HOME)"
-	git clone https://github.com/ohmyzsh/ohmyzsh.git "$OH_MY_ZSH_HOME"
+    mkdir -p "$(dirname $OH_MY_ZSH_HOME)"
+    git clone https://github.com/ohmyzsh/ohmyzsh.git "$OH_MY_ZSH_HOME"
 fi
 
 FZF_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/fzf"
 if [ ! -d "$FZF_PLUGIN_HOME" ]; then
-	mkdir -p "$(dirname $FZF_PLUGIN_HOME)"
-	git clone --depth 1 https://github.com/junegunn/fzf.git "$FZF_PLUGIN_HOME"
-	$FZF_PLUGIN_HOME/install
+    mkdir -p "$(dirname $FZF_PLUGIN_HOME)"
+    git clone --depth 1 https://github.com/junegunn/fzf.git "$FZF_PLUGIN_HOME"
+    $FZF_PLUGIN_HOME/install
 fi
 
 TASK_PLUGIN_HOME="${XDG_DATA_HOME:-$OH_MY_ZSH_HOME}/custom/plugins/task"
 if [ ! -d "$TASK_PLUGIN_HOME" ]; then
-	mkdir -p "$(dirname $TASK_PLUGIN_HOME)"
-	git clone https://github.com/sawadashota/go-task-completions.git "$TASK_PLUGIN_HOME"	
+    mkdir -p "$(dirname $TASK_PLUGIN_HOME)"
+    git clone https://github.com/sawadashota/go-task-completions.git "$TASK_PLUGIN_HOME"	
 fi
 
 autoload -Uz compinit
@@ -50,31 +50,31 @@ zinit ice atload"zpcdreplay" atclone"./zplug.zsh" atpull"%atclone"
 zinit light g-plane/pnpm-shell-completion
 
 plugins=(
-	git
-	docker
-	docker-compose
-	dotnet
-	flutter
-	git-commit
-	aws
-	dnf
-	asdf
-	yarn
-	npm
-	nats
-	github
-	node
-	z
-	bgnotify
-	# These two plugins must be installed manually along the tool it self
-	pnpm
-	task
-	# Testing
+    git
+    docker
+    docker-compose
+    dotnet
+    flutter
+    git-commit
+    aws
+    dnf
+    asdf
+    yarn
+    npm
+    nats
+    github
+    node
+    z
+    bgnotify
+    # These two plugins must be installed manually along the tool it self
+    pnpm
+    task
+    # Testing
 )
 
 ASDF_PATH="${XDG_DATA_HOME:-${HOME}/.asdf}"
 if [ ! -d "$ASDF_PATH" ]; then
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 fi
 
 . "$HOME/.asdf/asdf.sh"
@@ -183,8 +183,8 @@ esac
 export XDG_RUNTIME_DIR="/run/user/$UID"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
 
-
-PATH=/bin/tesseract:$PATH
+# Source the path-handling script
+source "$HOME/.zsh/scripts/utils/path-handling.sh"
 
 . "$HOME/.deno/env"
 
@@ -192,7 +192,4 @@ fpath=(~/.zsh $fpath)
 
 source "$HOME/.zsh/completions/gh/_gh"
 
-
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/share/pnpm:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/tiagoluizpoli/.asdf/shims:/home/tiagoluizpoli/.asdf/bin:/home/tiagoluizpoli/.deno/bin:/home/tiagoluizpoli/.rye/shims:/home/tiagoluizpoli/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin:/home/tiagoluizpoli/.dotnet/tools:/home/tiagoluizpoli/.local/share/JetBrains/Toolbox/scripts:/home/tiagoluizpoli/.yarn/bin:/home/tiagoluizpoli/.local/share/.oh-my-zsh/custom/plugins/fzf/bin:/home/tiagoluizpoli/.asdf/installs/nodejs/20.18.3/bin
