@@ -21,9 +21,9 @@ else
     echo "$ZSH_SCRIPTS_DIR directory already exists."
 fi
 
-# Copy all .zsh scripts to ~/.zsh/scripts
-echo "Copying .zsh scripts to $ZSH_SCRIPTS_DIR..."
-find ./scripts -name "*.zsh" -print0 | while IFS= read -r -d $'\0' script; do
+# Copy all .zsh and sh scripts to ~/.zsh/scripts
+echo "Copying .zsh and .sh scripts to $ZSH_SCRIPTS_DIR..."
+find ./scripts \( -name "*.zsh" -o -name "*.sh" \) -print0 | while IFS= read -r -d $'\0' script; do
     cp "$script" "$ZSH_SCRIPTS_DIR/"
     echo "Copied $script to $ZSH_SCRIPTS_DIR"
 done
