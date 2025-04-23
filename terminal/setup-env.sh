@@ -9,7 +9,7 @@ echo "zsh and ranger installed."
 
 # Copy .zshrc to the home directory
 echo "Copying .zshrc to the home directory..."
-cp ./terminal/.zshrc ~/
+cp ./.zshrc ~/
 echo ".zshrc copied to $HOME"
 
 # Create .zsh/scripts directory if it doesn't exist
@@ -23,7 +23,7 @@ fi
 
 # Copy all .zsh scripts to ~/.zsh/scripts
 echo "Copying .zsh scripts to $ZSH_SCRIPTS_DIR..."
-find ./terminal/scripts -name "*.zsh" -print0 | while IFS= read -r -d $'\0' script; do
+find ./scripts -name "*.zsh" -print0 | while IFS= read -r -d $'\0' script; do
   cp "$script" "$ZSH_SCRIPTS_DIR/"
   echo "Copied $script to $ZSH_SCRIPTS_DIR"
 done
@@ -39,7 +39,7 @@ fi
 
 # Unzip all font.zip files from terminal/config-files/fonts into $HOME/.fonts
 echo "Unzipping font files into $FONTS_DIR..."
-find ./terminal/config-files/fonts -name "font.zip" -print0 | while IFS= read -r -d $'\0' zipfile; do
+find ./config-files/fonts -name "font.zip" -print0 | while IFS= read -r -d $'\0' zipfile; do
   echo "Unzipping $zipfile..."
   sudo apt install unzip
   unzip "$zipfile" -d "$FONTS_DIR"
