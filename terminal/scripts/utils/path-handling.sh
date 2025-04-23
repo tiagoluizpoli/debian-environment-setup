@@ -20,7 +20,7 @@ path_array=(
     $HOME/.local/share/JetBrains/Toolbox/scripts
     $HOME/.yarn/bin
     $OH_MY_ZSH_HOME/custom/plugins/fzf/bin
-    /home/tiagoluizpoli/.asdf/installs/nodejs/20.18.3/bin #This line still has an absolute path
+    $HOME/.asdf/installs/nodejs/20.18.3/bin #This line still has an absolute path
 )
 
 # Remove duplicate paths and ensure paths exist
