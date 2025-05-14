@@ -89,7 +89,6 @@ fi
 fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # initialise completions with ZSH's compinit
 
-
 # Load completions
 autoload -Uz compinit
 compinit -i
@@ -193,5 +192,5 @@ fpath=(~/.zsh $fpath)
 
 source "$HOME/.zsh/completions/gh/_gh"
 
-export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:/home/tiagoluizpoli/.local/share/pnpm:/home/tiagoluizpoli/.local/bin:/home/tiagoluizpoli/.asdf/shims:/home/tiagoluizpoli/.asdf/shims:/home/tiagoluizpoli/.asdf/bin:/home/tiagoluizpoli/.deno/bin:/home/tiagoluizpoli/.rye/shims:/home/tiagoluizpoli/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin:/home/tiagoluizpoli/.dotnet/tools:/home/tiagoluizpoli/.local/share/JetBrains/Toolbox/scripts:/home/tiagoluizpoli/.yarn/bin:/home/tiagoluizpoli/.local/share/.oh-my-zsh/custom/plugins/fzf/bin:/home/tiagoluizpoli/.asdf/installs/nodejs/20.18.3/bin
+export PATH=$PATH/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:$HOME/.local/bin:$HOME/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:$HOME/.local/bin:$HOME/.asdf/shims:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/bin/tesseract:$HOME/.local/share/pnpm:$HOME/.local/bin:$HOME/.asdf/shims:$HOME/.asdf/shims:$HOME/.asdf/bin:$HOME/.deno/bin:$HOME/.rye/shims:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin:$HOME/.dotnet/tools:$HOME/.local/share/JetBrains/Toolbox/scripts:$HOME/.yarn/bin:$HOME/.local/share/.oh-my-zsh/custom/plugins/fzf/bin:$HOME/.asdf/installs/nodejs/20.18.3/bin:$ASDF_DATA_DIR/shims:$HOME/.asdf
 
