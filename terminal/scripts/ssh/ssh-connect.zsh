@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Define the path to the JSON configuration file
-CONFIG_FILE="/home/tiagoluizpoli/.zsh/ssh-connection-config.json"
+CONFIG_FILE="$HOME/.zsh/ssh-connection-config.json"
 
 # Function to load configuration and connect via SSH
 function connect_ssh() {
